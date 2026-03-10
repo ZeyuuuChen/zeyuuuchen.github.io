@@ -9,7 +9,7 @@ export function Navigation() {
     { path: "/education", label: "Education" },
     { path: "/research", label: "Research" },
     { path: "/portfolio", label: "Portfolio" },
-    { path: "/games", label: "Interactive" },
+    // { path: "/games", label: "Interactive" },
   ];
 
   const [eyeState, setEyeState] = useState("normal");
