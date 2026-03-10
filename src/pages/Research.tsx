@@ -70,8 +70,8 @@ const publications = [
   { year: "2024", title: "UW-SDF: Exploiting Hybrid Geometric Priors for Neural SDF Reconstruction from Underwater Multi-view Monocular Images", journal: "IROS", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
   { year: "2024", title: "FAFA: Frequency-Aware Flow-Aided Self-Supervision for Underwater Object Pose Estimation", journal: "ECCV", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
   { year: "2023", title: "ROV6D: 6D Pose Estimation Benchmark Dataset for Underwater Remotely Operated Vehicles", journal: "IEEE RA-L", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2026", title: "ISVT: Generative Identity-Suppressive Video Transformations under Utility-Privacy Evaluation", journal: "ICML", status: "Under Review", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2026", title: "GroundRecon: High-Fidelity Scene Surface Reconstruction with Grounded Instance Decomposition", journal: "ICML", status: "Under Review", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
+  // { year: "2026", title: "ISVT: Generative Identity-Suppressive Video Transformations under Utility-Privacy Evaluation", journal: "ICML", status: "Under Review", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
+  // { year: "2026", title: "GroundRecon: High-Fidelity Scene Surface Reconstruction with Grounded Instance Decomposition", journal: "ICML", status: "Under Review", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
 ];
 
 export function Research() {
