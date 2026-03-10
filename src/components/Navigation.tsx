@@ -70,7 +70,7 @@ export function Navigation() {
     <nav className="flex flex-row md:flex-col h-full py-6 px-6 md:py-12 md:px-12 items-center md:items-start relative">
       <div className="md:mb-32 text-left flex flex-col items-start gap-2 relative">
         <img 
-          src="/signature-zeyu.png" 
+          src="signature-zeyu.png" 
           alt="Zeyu Signature" 
           className="h-6 md:h-9 object-contain filter drop-shadow-sm"
           referrerPolicy="no-referrer"

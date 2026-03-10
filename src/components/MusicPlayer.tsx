@@ -37,7 +37,7 @@ export function MusicPlayer() {
     <div className="fixed bottom-8 right-8 z-50">
       {/* Background music: Merry Christmas Mr. Lawrence by Ryuichi Sakamoto */}
       {/* Note: Using a placeholder piano track as we cannot host copyrighted music directly. User needs to upload their own file or we use a public domain piano track. */}
-      <audio ref={audioRef} loop autoPlay src="/merry-christmas-mr-lawrence.mp3" />
+      <audio ref={audioRef} loop autoPlay src="merry-christmas-mr-lawrence.mp3" />
       <button
         onClick={togglePlay}
         className={`p-3 rounded-full bg-[var(--color-bg)] border border-[var(--color-ink)]/20 shadow-lg hover:scale-110 transition-transform duration-300 ${isPlaying ? 'animate-spin-slow' : ''}`}

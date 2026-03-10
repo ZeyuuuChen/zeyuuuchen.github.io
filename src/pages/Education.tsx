@@ -121,7 +121,11 @@ export function Education() {
                     coordinates={edu.coordinates}
                     onMouseEnter={() => setHoveredId(edu.id)}
                     onMouseLeave={() => setHoveredId(null)}
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      default: { outline: "none", cursor: "pointer" },
+                      hover: { outline: "none", cursor: "pointer" },
+                      pressed: { outline: "none", cursor: "pointer" },
+                    }}
                   >
                     <circle 
                       r={isHovered ? 6 : 4} 

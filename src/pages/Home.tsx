@@ -20,7 +20,7 @@ export function Home() {
                 Zeyu Chen
               </h1> */}
               <img 
-                src="/signature.png" 
+                src="signature.png" 
                 alt="Zeyu Chen Signature" 
                 className="h-20 md:h-28 lg:h-32 object-contain filter drop-shadow-sm"
                 referrerPolicy="no-referrer"
