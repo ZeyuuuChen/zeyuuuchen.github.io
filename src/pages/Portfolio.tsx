@@ -32,7 +32,7 @@ export function Portfolio() {
           <div>
             <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">Portfolio</h1>
             <p className="font-body text-sm md:text-base max-w-2xl opacity-80 leading-relaxed mx-auto md:mx-0">
-              Photography by Zeyu Chen (Loaded {displayImages.length} images)
+              Photography by Zeyu  (Loaded {displayImages.length} images)
             </p>
             <p className="font-serif italic text-sm md:text-base max-w-2xl opacity-60 leading-relaxed mx-auto md:mx-0 mt-2">
               "If your pictures aren't good enough, you're not close enough." — Robert Capa

@@ -41,7 +41,7 @@ export function Home() {
                 <span className="text-sm">— Hermann Hesse</span>
               </blockquote>
               <p className="font-medium text-[var(--color-ink)]">
-                Glad to connect.
+                Maybe we can be friends.
               </p>
             </motion.div>
 
