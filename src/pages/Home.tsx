@@ -2,9 +2,11 @@ import { motion } from "motion/react";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function Home() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
 
   return (
     <PageTransition>
@@ -26,7 +28,7 @@ export function Home() {
               <img 
                 src="signature.png" 
                 alt="Zeyu Chen Signature" 
-                className="h-20 md:h-28 lg:h-32 object-contain filter drop-shadow-sm"
+                className={`h-20 md:h-28 lg:h-32 object-contain filter drop-shadow-sm transition-all duration-500 ${theme === 'dark' ? 'invert' : ''}`}
                 referrerPolicy="no-referrer"
               />
             </motion.div>

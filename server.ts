@@ -15,6 +15,10 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     ip TEXT,
     user_agent TEXT,
+    country TEXT DEFAULT 'Unknown',
+    country_code TEXT DEFAULT 'UN',
+    lat REAL,
+    lon REAL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
   )
 `);
@@ -26,6 +30,21 @@ try {
   if (!hasCountry) {
     db.exec("ALTER TABLE visits ADD COLUMN country TEXT DEFAULT 'Unknown'");
     console.log("Added country column to visits table");
+  }
+  const hasCountryCode = tableInfo.some(column => column.name === 'country_code');
+  if (!hasCountryCode) {
+    db.exec("ALTER TABLE visits ADD COLUMN country_code TEXT DEFAULT 'UN'");
+    console.log("Added country_code column to visits table");
+  }
+  const hasLat = tableInfo.some(column => column.name === 'lat');
+  if (!hasLat) {
+    db.exec("ALTER TABLE visits ADD COLUMN lat REAL");
+    console.log("Added lat column to visits table");
+  }
+  const hasLon = tableInfo.some(column => column.name === 'lon');
+  if (!hasLon) {
+    db.exec("ALTER TABLE visits ADD COLUMN lon REAL");
+    console.log("Added lon column to visits table");
   }
 } catch (e) {
   console.error("Migration failed", e);
@@ -43,20 +62,26 @@ async function startServer() {
     const userAgent = req.headers["user-agent"];
     
     let country = "Unknown";
+    let countryCode = "UN";
+    let lat = null;
+    let lon = null;
     try {
       // Simple IP to Country lookup (Free API)
       const cleanIp = Array.isArray(ip) ? ip[0] : ip?.split(',')[0].trim();
       if (cleanIp && cleanIp !== '::1' && cleanIp !== '127.0.0.1') {
-        const geoRes = await fetch(`http://ip-api.com/json/${cleanIp}?fields=country`);
+        const geoRes = await fetch(`http://ip-api.com/json/${cleanIp}?fields=country,countryCode,lat,lon`);
         const geoData = await geoRes.json();
         if (geoData.country) country = geoData.country;
+        if (geoData.countryCode) countryCode = geoData.countryCode;
+        if (geoData.lat) lat = geoData.lat;
+        if (geoData.lon) lon = geoData.lon;
       }
     } catch (e) {
       console.error("Geo lookup failed", e);
     }
 
-    const stmt = db.prepare("INSERT INTO visits (ip, country, user_agent) VALUES (?, ?, ?)");
-    stmt.run(ip, country, userAgent);
+    const stmt = db.prepare("INSERT INTO visits (ip, country, country_code, lat, lon, user_agent) VALUES (?, ?, ?, ?, ?, ?)");
+    stmt.run(ip, country, countryCode, lat, lon, userAgent);
 
     const countStmt = db.prepare("SELECT COUNT(*) as count FROM visits");
     const { count } = countStmt.get() as { count: number };

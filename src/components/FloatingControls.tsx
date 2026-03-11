@@ -32,7 +32,7 @@ export function FloatingControls() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center bg-white/20 backdrop-blur-xl border border-white/30 rounded-full px-1 py-1 shadow-sm hover:shadow-md transition-all duration-500 group">
+    <div className="fixed bottom-6 right-6 z-50 flex items-center bg-[var(--color-paper)]/20 backdrop-blur-xl border border-[var(--color-ink)]/10 rounded-full px-1 py-1 shadow-sm hover:shadow-md transition-all duration-500 group">
       <audio ref={audioRef} loop autoPlay src="merry-christmas-mr-lawrence.mp3" />
       
       {/* Language Toggle */}

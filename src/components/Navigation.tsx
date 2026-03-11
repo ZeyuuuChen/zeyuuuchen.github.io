@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { Mail, Linkedin, Youtube } from "lucide-react";
+import { Mail, Linkedin, Youtube, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 import { VisitorCounter } from "./VisitorCounter";
 
 export function Navigation() {
   const { t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   
   const links = [
     { path: "/", label: t("Home", "主页") },
@@ -80,9 +82,20 @@ export function Navigation() {
         <img 
           src="signature-zeyu.png" 
           alt="Zeyu Signature" 
-          className="h-6 md:h-9 object-contain filter drop-shadow-sm"
+          className={`h-6 md:h-9 object-contain filter drop-shadow-sm transition-all duration-500 ${theme === 'dark' ? 'invert' : ''}`}
           referrerPolicy="no-referrer"
         />
+      </div>
+
+      {/* Mobile Theme Toggle */}
+      <div className="md:hidden ml-4">
+        <button 
+          onClick={toggleTheme}
+          className="p-2 text-slate-400 hover:text-blue-900 transition-all duration-300 cursor-pointer"
+          title={theme === "light" ? "Dark Mode" : "Light Mode"}
+        >
+          {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+        </button>
       </div>
 
       <ul className="flex flex-row md:flex-col gap-6 md:gap-8 ml-auto md:ml-0 overflow-x-auto md:overflow-visible items-center md:items-start w-full md:w-auto">
@@ -108,6 +121,13 @@ export function Navigation() {
       <div className="flex flex-col items-center md:items-start gap-5 fixed md:absolute bottom-8 left-6 md:bottom-12 md:left-12 z-50">
         {/* Social Links - Hidden on mobile to avoid covering content */}
         <div className="hidden md:flex flex-col gap-5">
+          <button 
+            onClick={toggleTheme}
+            className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300 cursor-pointer"
+            title={theme === "light" ? "Dark Mode" : "Light Mode"}
+          >
+            {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </button>
           <a href="mailto:chenzeyu114@gmail.com" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="Email">
             <Mail className="w-5 h-5" />
           </a>
@@ -141,7 +161,7 @@ export function Navigation() {
                 initial={{ opacity: 0, y: 10, scale: 0.8 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.8 }}
-                className="absolute left-[120%] top-[-10px] bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-2xl rounded-bl-none shadow-sm border border-[var(--color-ink)]/10 text-[10px] font-mono whitespace-nowrap z-10 text-[var(--color-ink)]/80"
+                className="absolute left-[120%] top-[-10px] bg-[var(--color-paper)]/90 backdrop-blur-sm px-3 py-1.5 rounded-2xl rounded-bl-none shadow-sm border border-[var(--color-ink)]/20 text-[10px] font-mono whitespace-nowrap z-10 text-[var(--color-ink)]"
               >
                 {phrase}
               </motion.div>

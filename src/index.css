@@ -19,6 +19,15 @@
   --animate-spin-slow: spin-slow linear infinite;
 }
 
+@layer base {
+  .dark {
+    --color-bg: #050B14;
+    --color-ink: #E0E6ED;
+    --color-ink-light: #A0AEC0;
+    --color-paper: #0A1930;
+  }
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
