@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { PageTransition } from "../components/PageTransition";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const imageModules = import.meta.glob('/public/figs/portfolio/*.{png,jpg,JPG,jpeg,webp,gif}', { eager: true });
 const portfolioImages = Object.keys(imageModules).map(key => key.replace('/public', ''));
@@ -23,19 +24,23 @@ const unsplashImages = [
 const displayImages = [...portfolioImages, ...unsplashImages];
 
 export function Portfolio() {
+  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <PageTransition>
-      <div className="flex flex-col h-full overflow-y-auto p-8 md:p-16 lg:p-24 max-w-7xl mx-auto">
+      <div className="w-full h-full overflow-y-auto">
+        <div className="flex flex-col min-h-full p-8 md:p-16 lg:p-24 max-w-7xl mx-auto">
         <header className="mb-20 flex flex-col md:flex-row md:justify-between md:items-end gap-8 text-center md:text-left">
           <div>
-            <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">Portfolio</h1>
+            <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">
+              {t("Portfolio", "作品集")}
+            </h1>
             <p className="font-body text-sm md:text-base max-w-2xl opacity-80 leading-relaxed mx-auto md:mx-0">
-              Photography by Zeyu  (Loaded {displayImages.length} images)
+              {t("Photography by Zeyu", "Zeyu 的摄影作品")} ({t("Loaded", "已加载")} {displayImages.length} {t("images", "张图片")})
             </p>
             <p className="font-serif italic text-sm md:text-base max-w-2xl opacity-60 leading-relaxed mx-auto md:mx-0 mt-2">
-              "If your pictures aren't good enough, you're not close enough." — Robert Capa
+              {t("\"If your pictures aren't good enough, you're not close enough.\"","\"If your pictures aren't good enough, you're not close enough.\"")} — Robert Capa
             </p>
           </div>
         </header>
@@ -60,8 +65,9 @@ export function Portfolio() {
           ))}
         </div>
       </div>
+    </div>
 
-      <AnimatePresence>
+    <AnimatePresence>
         {selectedImage && (
           <motion.div
             initial={{ opacity: 0 }}

@@ -11,6 +11,12 @@
   --color-ink: #0A1930; /* Deep Prussian Blue */
   --color-ink-light: #1E3A5F; /* Lighter Blue */
   --color-paper: #FFFFFF;
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  --animate-spin-slow: spin-slow linear infinite;
 }
 
 body {

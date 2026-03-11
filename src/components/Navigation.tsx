@@ -2,14 +2,16 @@ import { NavLink } from "react-router-dom";
 import { Mail, Linkedin, Youtube } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function Navigation() {
+  const { t } = useLanguage();
+  
   const links = [
-    { path: "/", label: "Home" },
-    { path: "/education", label: "Education" },
-    { path: "/research", label: "Research" },
-    { path: "/portfolio", label: "Portfolio" },
-    // { path: "/games", label: "Interactive" },
+    { path: "/", label: t("Home", "主页") },
+    { path: "/education", label: t("Education", "教育") },
+    { path: "/research", label: t("Research", "研究") },
+    { path: "/portfolio", label: t("Portfolio", "作品集") },
   ];
 
   const [eyeState, setEyeState] = useState("normal");
@@ -17,14 +19,19 @@ export function Navigation() {
   const [showBubble, setShowBubble] = useState(false);
 
   const phrases = [
+    "你好! (Nǐ Hǎo)",
     "Beep boop!",
-    "Hello there!",
-    "Nice to meet you!",
-    "Exploring...",
+    "Bonjour! ",
     "Processing...",
+    "こんにちは! (Hi!)",
     "Wow!",
-    "Hmm...",
-    "Oh!"
+    "Ciao!",
+    "Oi!Oi!",
+    "¡Hola! ",
+    "안녕하세요! (Hi!)",
+    "Exploring...",
+    "Hallo! ",
+    "مرحبا! ",
   ];
 
   useEffect(() => {
@@ -75,7 +82,43 @@ export function Navigation() {
           className="h-6 md:h-9 object-contain filter drop-shadow-sm"
           referrerPolicy="no-referrer"
         />
-        {/* Animated Robot Eyes */}
+      </div>
+
+      <ul className="flex flex-row md:flex-col gap-6 md:gap-8 ml-auto md:ml-0 overflow-x-auto md:overflow-visible items-center md:items-start w-full md:w-auto">
+        {links.map((link) => (
+          <li key={link.path} className="flex-shrink-0">
+            <NavLink
+              to={link.path}
+              className={({ isActive }) =>
+                `block font-serif uppercase tracking-widest transition-all duration-500 origin-left ${
+                  isActive
+                    ? "text-blue-900 font-bold text-lg md:text-xl"
+                    : "text-slate-400 text-xs md:text-sm hover:scale-110 hover:text-slate-600"
+                }`
+              }
+            >
+              {link.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+
+      {/* Social Links & Robot - Bottom Left */}
+      <div className="flex flex-col items-center md:items-start gap-5 fixed md:absolute bottom-8 left-6 md:bottom-12 md:left-12 z-50">
+        {/* Social Links - Hidden on mobile to avoid covering content */}
+        <div className="hidden md:flex flex-col gap-5">
+          <a href="mailto:chenzeyu114@gmail.com" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="Email">
+            <Mail className="w-5 h-5" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="LinkedIn">
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="YouTube">
+            <Youtube className="w-5 h-5" />
+          </a>
+        </div>
+
+        {/* Animated Robot Eyes - Always visible, placed below icons on desktop */}
         <div className="relative">
           <div className="flex gap-2 items-center justify-center w-10 h-6 bg-[var(--color-ink)] rounded-full px-2 shadow-inner">
             <motion.div 
@@ -104,38 +147,6 @@ export function Navigation() {
             )}
           </AnimatePresence>
         </div>
-      </div>
-
-      <ul className="flex flex-row md:flex-col gap-6 md:gap-8 ml-auto md:ml-0 overflow-x-auto md:overflow-visible items-center md:items-start w-full md:w-auto">
-        {links.map((link) => (
-          <li key={link.path} className="flex-shrink-0">
-            <NavLink
-              to={link.path}
-              className={({ isActive }) =>
-                `block font-serif uppercase tracking-widest transition-all duration-500 origin-left ${
-                  isActive
-                    ? "text-blue-900 font-bold text-lg md:text-xl"
-                    : "text-slate-400 text-xs md:text-sm hover:scale-110 hover:text-slate-600"
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-
-      {/* Social Links - Bottom Left (Desktop Only) */}
-      <div className="hidden md:flex flex-col gap-5 absolute bottom-12 left-12">
-        <a href="mailto:chenzeyu114@gmail.com" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="Email">
-          <Mail className="w-5 h-5" />
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="LinkedIn">
-          <Linkedin className="w-5 h-5" />
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-900 hover:scale-110 transition-all duration-300" title="YouTube">
-          <Youtube className="w-5 h-5" />
-        </a>
       </div>
     </nav>
   );

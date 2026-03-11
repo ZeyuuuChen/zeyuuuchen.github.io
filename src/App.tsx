@@ -1,7 +1,8 @@
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "motion/react";
 import { Navigation } from "./components/Navigation";
-import { MusicPlayer } from "./components/MusicPlayer";
+import { FloatingControls } from "./components/FloatingControls";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import { Home } from "./pages/Home";
 import { Research } from "./pages/Research";
 import { Portfolio } from "./pages/Portfolio";
@@ -26,20 +27,22 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <Router>
-      <div className="h-screen w-screen bg-[var(--color-bg)] text-[var(--color-ink)] overflow-hidden flex flex-col md:flex-row font-body selection:bg-[var(--color-ink)] selection:text-[var(--color-bg)]">
-        {/* Left Navigation (Desktop) / Top Navigation (Mobile) */}
-        <div className="w-full md:w-48 lg:w-64 flex-shrink-0 h-auto md:h-full z-50">
-          <Navigation />
-        </div>
+    <LanguageProvider>
+      <Router>
+        <div className="h-screen w-screen bg-[var(--color-bg)] text-[var(--color-ink)] overflow-hidden flex flex-col md:flex-row font-body selection:bg-[var(--color-ink)] selection:text-[var(--color-bg)]">
+          {/* Left Navigation (Desktop) / Top Navigation (Mobile) */}
+          <div className="w-full md:w-48 lg:w-64 flex-shrink-0 h-auto md:h-full z-50">
+            <Navigation />
+          </div>
 
-        {/* Main Content Area */}
-        <main className="flex-1 h-full relative overflow-hidden">
-          <AnimatedRoutes />
-        </main>
-        
-        <MusicPlayer />
-      </div>
-    </Router>
+          {/* Main Content Area */}
+          <main className="flex-1 h-full relative overflow-hidden">
+            <AnimatedRoutes />
+          </main>
+          
+          <FloatingControls />
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }

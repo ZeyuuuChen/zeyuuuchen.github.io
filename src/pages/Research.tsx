@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { PageTransition } from "../components/PageTransition";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const researchImages = import.meta.glob('/public/figs/research/*.{png,jpg,jpeg,webp,gif}', { eager: true });
 const getResearchImage = (name: string, fallback: string) => {
@@ -8,79 +9,84 @@ const getResearchImage = (name: string, fallback: string) => {
   return key ? key.replace('/public', '') : fallback;
 };
 
-const projects = [
-  {
-    id: "01",
-    name: "UW-SDF",
-    desc: "Exploiting Hybrid Geometric Priors for Neural SDF Reconstruction from Underwater Multi-view Monocular Images.",
-    tags: ["3D Recon", "Neural SDF"],
-    img: getResearchImage("UW-SDF", "https://figures.semanticscholar.org/6fa3cc535ba4e78c6217ce7044ff4f37b0f1285e/1-Figure1-1.png"),
-    colSpan: "md:col-span-2",
-    links: [
-      { name: "Website", url: "https://ieeexplore.ieee.org/document/10802499" },
-      { name: "Github", url: "https://github.com/THUSIGSICLAB/ROV6D" },
-      { name: "PDF", url: "#" }
-    ]
-  },
-  {
-    id: "02",
-    name: "ROV6D",
-    desc: "Benchmark dataset for 6D pose estimation of ROVs in underwater environments.",
-    tags: ["6D Pose", "Dataset"],
-    img: getResearchImage("ROV6D", "https://figures.semanticscholar.org/6c8775bc0f71de2ea279285e4523785bf2482757/2-Figure1-1.png"),
-    colSpan: "md:col-span-1",
-    links: [
-      { name: "Website", url: "https://ieeexplore.ieee.org/document/10313927" },
-      { name: "Video", url: "#" },
-      { name: "PDF", url: "#" }
-    ]
-  },
-  {
-    id: "03",
-    name: "MonoGSDF",
-    desc: "Monocular Geometric Cues for Gaussian Splatting-Guided Implicit Surface Reconstruction.",
-    tags: ["Gaussian Splatting"],
-    img: getResearchImage("MonoGSDF", "https://figures.semanticscholar.org/ffdb0c253ff8f3e590aa96a8edc2d37b8d4257fb/1-Figure1-1.png"),
-    colSpan: "md:col-span-1",
-    links: [
-      { name: "Website", url: "https://bmvc2025.bmva.org/proceedings/690/" },
-      { name: "Video", url: "https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_690/video.mp4" },
-      { name: "PDF", url: "https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_690/paper.pdf" }
-    ]
-  },
-  {
-    id: "04",
-    name: "AquaSim",
-    desc: "Unity3D-Based Framework for Multimodal Underwater Simulation.",
-    tags: ["Unity3D", "Simulation"],
-    img: getResearchImage("AquaSim", "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=600&auto=format&fit=crop"),
-    colSpan: "md:col-span-2",
-    links: [
-      { name: "Website", url: "https://sites.google.com/view/aq2uasim/call-for-papers?authuser=0" },
-      // { name: "Video", url: "#" },
-      { name: "PDF", url: "#" }
-    ]
-  },
-];
+export function Research() {
+  const { t } = useLanguage();
 
-const publications = [
-  { year: "2025", title: "Reinforcement Learning Meets Masked Generative Models: Mask-GRPO for Text-to-Image Generation", journal: "NeurIPS", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2025", title: "MonoGSDF: Exploring Monocular Geometric Cues for Gaussian Splatting-Guided Implicit Surface Reconstruction", journal: "BMVC", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2025", title: "AquaSim: A Unity3D-Based Framework for Multimodal Underwater Simulation in 3D Vision Research", journal: "ICRA", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2024", title: "UW-SDF: Exploiting Hybrid Geometric Priors for Neural SDF Reconstruction from Underwater Multi-view Monocular Images", journal: "IROS", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2024", title: "FAFA: Frequency-Aware Flow-Aided Self-Supervision for Underwater Object Pose Estimation", journal: "ECCV", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
-  { year: "2023", title: "ROV6D: 6D Pose Estimation Benchmark Dataset for Underwater Remotely Operated Vehicles", journal: "IEEE RA-L", status: "Published", links: [{ name: "Website", url: "#" }, { name: "Video", url: "#" }, { name: "PDF", url: "#" }] },
+  const projects = [
+    {
+      id: "01",
+      name: "UW-SDF",
+      desc: t("Exploiting Hybrid Geometric Priors for Neural SDF Reconstruction from Underwater Multi-view Monocular Images.", "利用混合几何先验从水下多视图单目图像中进行神经 SDF 重建。"),
+      tags: ["3D Recon", "Neural SDF"],
+      img: getResearchImage("UW-SDF", "https://figures.semanticscholar.org/6fa3cc535ba4e78c6217ce7044ff4f37b0f1285e/1-Figure1-1.png"),
+      colSpan: "md:col-span-2",
+      links: [
+        { name: t("Website", "网站"), url: "https://ieeexplore.ieee.org/document/10802499" },
+        { name: t("Github", "源码"), url: "https://github.com/THUSIGSICLAB/ROV6D" },
+        { name: t("PDF", "论文"), url: "#" }
+      ]
+    },
+    {
+      id: "02",
+      name: "ROV6D",
+      desc: t("Benchmark dataset for 6D pose estimation of ROVs in underwater environments.", "水下环境 ROV 6D 姿态估计的基准数据集。"),
+      tags: ["6D Pose", "Dataset"],
+      img: getResearchImage("ROV6D", "https://figures.semanticscholar.org/6c8775bc0f71de2ea279285e4523785bf2482757/2-Figure1-1.png"),
+      colSpan: "md:col-span-1",
+      links: [
+        { name: t("Website", "网站"), url: "https://ieeexplore.ieee.org/document/10313927" },
+        { name: t("Video", "视频"), url: "#" },
+        { name: t("PDF", "论文"), url: "#" }
+      ]
+    },
+    {
+      id: "03",
+      name: "MonoGSDF",
+      desc: t("Monocular Geometric Cues for Gaussian Splatting-Guided Implicit Surface Reconstruction.", "用于高斯泼溅引导的隐式表面重建的单目几何线索。"),
+      tags: ["Gaussian Splatting"],
+      img: getResearchImage("MonoGSDF", "https://figures.semanticscholar.org/ffdb0c253ff8f3e590aa96a8edc2d37b8d4257fb/1-Figure1-1.png"),
+      colSpan: "md:col-span-1",
+      links: [
+        { name: t("Website", "网站"), url: "https://bmvc2025.bmva.org/proceedings/690/" },
+        { name: t("Video", "视频"), url: "https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_690/video.mp4" },
+        { name: t("PDF", "论文"), url: "https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_690/paper.pdf" }
+      ]
+    },
+    {
+      id: "04",
+      name: "AquaSim",
+      desc: t("Unity3D-Based Framework for Multimodal Underwater Simulation.", "基于 Unity3D 的多模态水下仿真框架。"),
+      tags: ["Unity3D", "Simulation"],
+      img: getResearchImage("AquaSim", "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=600&auto=format&fit=crop"),
+      colSpan: "md:col-span-2",
+      links: [
+        { name: t("Website", "网站"), url: "https://sites.google.com/view/aq2uasim/call-for-papers?authuser=0" },
+        // { name: "Video", url: "#" },
+        { name: t("PDF", "论文"), url: "#" }
+      ]
+    },
   ];
 
-export function Research() {
+  const publications = [
+    { year: "2025", title: "Reinforcement Learning Meets Masked Generative Models: Mask-GRPO for Text-to-Image Generation", journal: "NeurIPS", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+    { year: "2025", title: "MonoGSDF: Exploring Monocular Geometric Cues for Gaussian Splatting-Guided Implicit Surface Reconstruction", journal: "BMVC", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+    { year: "2025", title: "AquaSim: A Unity3D-Based Framework for Multimodal Underwater Simulation in 3D Vision Research", journal: "ICRA", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+    { year: "2024", title: "UW-SDF: Exploiting Hybrid Geometric Priors for Neural SDF Reconstruction from Underwater Multi-view Monocular Images", journal: "IROS", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+    { year: "2024", title: "FAFA: Frequency-Aware Flow-Aided Self-Supervision for Underwater Object Pose Estimation", journal: "ECCV", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+    { year: "2023", title: "ROV6D: 6D Pose Estimation Benchmark Dataset for Underwater Remotely Operated Vehicles", journal: "IEEE RA-L", status: t("Published", "已发表"), links: [{ name: t("Website", "网站"), url: "#" }, { name: t("Video", "视频"), url: "#" }, { name: t("PDF", "论文"), url: "#" }] },
+  ];
+
   return (
     <PageTransition>
-      <div className="flex flex-col h-full overflow-y-auto p-8 md:p-16 lg:p-24 max-w-7xl mx-auto">
+      <div className="w-full h-full overflow-y-auto">
+        <div className="flex flex-col min-h-full p-8 md:p-16 lg:p-24 max-w-7xl mx-auto">
         
         <header className="mb-20 text-center md:text-left">
-          <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">Research</h1>
+          <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">
+            {t("Research", "科学研究")}
+          </h1>
           <p className="font-body text-sm md:text-base max-w-2xl opacity-80 leading-relaxed mx-auto md:mx-0">
-            Investigating the fundamental principles of nature through rigorous methodology and computational analysis.
+            {t("Investigating the fundamental principles of nature through rigorous methodology and computational analysis.", "通过严谨的方法论和计算分析，探索自然界的基本原理。")}
           </p>
         </header>
 
@@ -88,7 +94,7 @@ export function Research() {
         <section className="mb-24">
           <h2 className="font-serif text-xl md:text-2xl text-[var(--color-ink)] uppercase tracking-widest mb-12 flex items-center justify-center md:justify-start gap-6">
             <span className="w-12 h-[1px] bg-[var(--color-ink)]/30"></span>
-            Research Projects
+            {t("Research Projects", "研究项目")}
             <span className="w-12 h-[1px] bg-[var(--color-ink)]/30 md:hidden"></span>
           </h2>
           
@@ -143,7 +149,7 @@ export function Research() {
         <section>
           <h2 className="font-serif text-xl md:text-2xl text-[var(--color-ink)] uppercase tracking-widest mb-12 flex items-center justify-center md:justify-start gap-6">
             <span className="w-12 h-[1px] bg-[var(--color-ink)]/30"></span>
-            Publications
+            {t("Publications", "发表论文")}
             <span className="w-12 h-[1px] bg-[var(--color-ink)]/30 md:hidden"></span>
           </h2>
           
@@ -188,6 +194,7 @@ export function Research() {
           </div>
         </section>
 
+        </div>
       </div>
     </PageTransition>
   );

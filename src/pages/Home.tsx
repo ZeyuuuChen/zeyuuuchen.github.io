@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
 import { PageTransition } from "../components/PageTransition";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function Home() {
+  const { t } = useLanguage();
+
   return (
     <PageTransition>
-      <div className="relative flex flex-col h-full overflow-y-auto">
-        <div className="relative z-10 flex-1 p-8 md:p-16 lg:p-32 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto w-full gap-12">
+      <div className="w-full h-full overflow-y-auto">
+        <div className="relative flex flex-col min-h-full">
+          <div className="relative z-10 flex-1 p-8 md:p-16 lg:p-32 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto w-full gap-12">
           
           {/* Intro Content (Left) */}
           <div className="w-full md:w-1/2 flex flex-col justify-center">
@@ -34,14 +38,14 @@ export function Home() {
               className="font-body text-sm md:text-base leading-loose text-[var(--color-ink)]/80 mb-12"
             >
               <p className="mb-6 font-bold text-blue-900 text-lg">
-                — AI Researcher | Photographer
+                — {t("AI Researcher | Photographer", "AI 研究员 | 摄影师")}
               </p>
               <blockquote className="mb-6 italic border-l-2 border-[var(--color-ink)]/30 pl-4 text-[var(--color-ink)]/70">
                 "Ich bin ein Verehrer der Wandern, des Wechsels, der Phantasie. Ich halte nichts davon, meine Liebe an irgend einen Fleck der Erde festzunageln." <br/>
                 <span className="text-sm">— Hermann Hesse</span>
               </blockquote>
               <p className="font-medium text-[var(--color-ink)]">
-                Maybe we can be friends.
+                {t("Maybe we can be friends.", "也许我们可以成为朋友。")}
               </p>
             </motion.div>
 
@@ -52,10 +56,10 @@ export function Home() {
               className="flex flex-wrap gap-8"
             >
               <Link to="/research" className="font-mono font-bold uppercase tracking-widest text-xs border-b border-[var(--color-ink)]/30 pb-1 text-[var(--color-ink)] hover:text-blue-900 hover:border-blue-900 hover:scale-105 transition-all duration-300 inline-block origin-left">
-                Explore Research
+                {t("Explore Research", "探索研究")}
               </Link>
               <Link to="/portfolio" className="font-mono font-bold uppercase tracking-widest text-xs border-b border-[var(--color-ink)]/30 pb-1 text-[var(--color-ink)] hover:text-blue-900 hover:border-blue-900 hover:scale-105 transition-all duration-300 inline-block origin-left">
-                View Portfolio
+                {t("View Portfolio", "查看作品集")}
               </Link>
             </motion.div>
           </div>
@@ -160,6 +164,7 @@ export function Home() {
 
         </div>
       </div>
-    </PageTransition>
+    </div>
+  </PageTransition>
   );
 }

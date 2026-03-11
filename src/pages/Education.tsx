@@ -8,71 +8,75 @@ import {
   Line
 } from "react-simple-maps";
 import { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 
-const educationData = [
-  {
-    id: 3,
-    period: "Sep 2022 – Jun 2025",
-    school: "Tsinghua University",
-    location: "Beijing",
-    degree: "M.E., Electronic and Information Engineering",
-    // details: "Master's program in IID & Intelligent Computing Laboratory (Prof. Xiu Li)",
-    coordinates: [116.3262, 40.0000] as [number, number],
-  },
-  {
-    id: 2,
-    period: "Summer Semester 24",
-    school: "Technical University of Munich",
-    location: "Munich",
-    degree: "Exchange Student, Informatics",
-    // details: "Chair for Computer Aided Medical Procedures & Augmented Reality - CAMP (Prof. Nassir Navab)",
-    coordinates: [11.5820, 48.1351] as [number, number],
-  },
-  {
-    id: 4,
-    period: "Sep 2018 – Jun 2022",
-    school: "Zhejiang University",
-    location: "Hangzhou",
-    degree: "B.Eng., Ocean Engineering and Technology",
-    // details: "Institute of Marine Engineering and Technology (Prof. Haocai Huang)",
-    coordinates: [120.1551, 30.2741] as [number, number],
-  }
-];
-
-// Sort chronologically: ZJU (2018) -> THU (2022) -> TUM (2024)
-const chronologicalData = [
-  educationData.find(e => e.id === 4)!,
-  educationData.find(e => e.id === 3)!,
-  educationData.find(e => e.id === 2)!,
-];
-
 export function Education() {
+  const { t } = useLanguage();
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  const educationData = [
+    {
+      id: 3,
+      period: "Sep 2022 – Jun 2025",
+      school: t("Tsinghua University", "清华大学"),
+      location: t("Beijing", "北京"),
+      degree: t("M.E., Electronic and Information Engineering", "工学硕士，电子信息工程"),
+      details: t("Master's program in IID & Intelligent Computing Laboratory (Prof. Xiu Li)", "IID & 智能计算实验室硕士项目 (李秀教授)"),
+      coordinates: [116.3262, 40.0000] as [number, number],
+    },
+    {
+      id: 2,
+      period: "Summer Semester 24",
+      school: t("Technical University of Munich", "慕尼黑工业大学"),
+      location: t("Munich", "慕尼黑"),
+      degree: t("Exchange Student, Informatics", "交换生，信息学"),
+      details: t("Chair for Computer Aided Medical Procedures & Augmented Reality - CAMP (Prof. Nassir Navab)", "计算机辅助医疗程序与增强现实教席 - CAMP (Nassir Navab教授)"),
+      coordinates: [11.5820, 48.1351] as [number, number],
+    },
+    {
+      id: 4,
+      period: "Sep 2018 – Jun 2022",
+      school: t("Zhejiang University", "浙江大学"),
+      location: t("Hangzhou", "杭州"),
+      degree: t("B.Eng., Ocean Engineering and Technology", "工学学士，海洋工程与技术"),
+      details: t("Institute of Marine Engineering and Technology (Prof. Haocai Huang)", "海洋工程与技术研究所 (黄豪彩教授)"),
+      coordinates: [120.1551, 30.2741] as [number, number],
+    }
+  ];
+
+  const chronologicalData = [
+    educationData.find(e => e.id === 4)!,
+    educationData.find(e => e.id === 3)!,
+    educationData.find(e => e.id === 2)!,
+  ];
 
   return (
     <PageTransition>
-      <div className="flex flex-col h-full overflow-y-auto p-8 md:p-16 lg:p-24 max-w-7xl mx-auto relative">
+      <div className="w-full h-full overflow-y-auto">
+        <div className="flex flex-col min-h-full p-8 md:p-16 lg:p-24 max-w-7xl mx-auto relative">
         <header className="mb-12 text-center md:text-left">
-          <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">Education</h1>
+          <h1 className="font-serif text-3xl md:text-5xl text-[var(--color-ink)] uppercase tracking-tight mb-6">
+            {t("Education", "教育背景")}
+          </h1>
           <p className="font-body text-sm md:text-base max-w-2xl opacity-80 leading-relaxed mx-auto md:mx-0">
-            Academic journey and institutional background.
+            {t("Academic journey and institutional background.", "学术历程与教育背景。")}
           </p>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-8 w-full max-w-6xl mx-auto flex-1 h-full min-h-[500px]">
+        <div className="flex flex-col lg:flex-row gap-12 w-full max-w-6xl mx-auto items-start">
           {/* World Map Section */}
-          <div className="w-full lg:w-2/3 bg-[var(--color-ink)]/5 rounded-3xl overflow-hidden relative min-h-[400px] lg:min-h-0 flex items-center justify-center">
+          <div className="w-full lg:w-1/2 bg-[var(--color-ink)]/5 rounded-3xl overflow-hidden relative aspect-[4/3] lg:aspect-auto lg:h-[600px] flex items-center justify-center">
             <ComposableMap
               projection="geoMercator"
               projectionConfig={{
-                scale: 130,
-                center: [40, 35]
+                scale: 140,
+                center: [60, 35]
               }}
-              width={600}
-              height={500}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              width={500}
+              height={400}
+              style={{ width: "100%", height: "100%" }}
             >
               <Geographies geography={geoUrl}>
                 {({ geographies }) =>
@@ -81,10 +85,10 @@ export function Education() {
                       key={geo.rsmKey}
                       geography={geo}
                       fill="#cbd5e1"
-                      stroke="none" // Hide political borders to remain completely impartial
+                      stroke="none"
                       style={{
                         default: { outline: "none" },
-                        hover: { outline: "none", fill: "#cbd5e1" },
+                        hover: { outline: "none" },
                         pressed: { outline: "none" },
                       }}
                     />
@@ -103,11 +107,11 @@ export function Education() {
                     from={prevEdu.coordinates}
                     to={edu.coordinates}
                     stroke="#3b82f6"
-                    strokeWidth={2}
+                    strokeWidth={1.5}
                     strokeDasharray="4 4"
                     strokeLinecap="round"
                     className="animate-[dash_10s_linear_infinite]"
-                    style={{ opacity: 0.6 }}
+                    style={{ opacity: 0.4 }}
                   />
                 );
               })}
@@ -128,7 +132,7 @@ export function Education() {
                     }}
                   >
                     <circle 
-                      r={isHovered ? 6 : 4} 
+                      r={isHovered ? 5 : 3.5} 
                       fill={isHovered ? "#1e3a8a" : "#3b82f6"} 
                       stroke="#fff" 
                       strokeWidth={1.5} 
@@ -136,14 +140,17 @@ export function Education() {
                     />
                     <text
                       textAnchor="middle"
-                      y={-12}
+                      y={-14}
                       style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: isHovered ? "12px" : "10px",
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "11px",
                         fill: isHovered ? "#1e3a8a" : "#475569",
-                        fontWeight: isHovered ? "bold" : "normal",
+                        fontWeight: isHovered ? "600" : "500",
+                        letterSpacing: "0.02em",
+                        textTransform: "uppercase",
                         textShadow: "1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff",
-                        transition: "all 0.3s ease"
+                        transition: "all 0.3s ease",
+                        pointerEvents: "none"
                       }}
                     >
                       {edu.location.split(',')[0]}
@@ -155,16 +162,16 @@ export function Education() {
           </div>
 
           {/* Education List Section */}
-          <div className="w-full lg:w-1/3 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:pb-12">
             {educationData.map((edu, idx) => (
               <motion.div 
                 key={edu.id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className={`rounded-2xl p-6 border transition-all duration-300 cursor-pointer ${
+                className={`rounded-2xl p-6 border transition-all duration-300 cursor-pointer w-full group ${
                   hoveredId === edu.id 
-                    ? "bg-[var(--color-ink)]/10 border-[var(--color-ink)]/20 shadow-md scale-[1.02]" 
+                    ? "bg-[var(--color-ink)]/10 border-[var(--color-ink)]/20 shadow-lg -translate-y-1" 
                     : "bg-[var(--color-ink)]/5 border-[var(--color-ink)]/10 hover:bg-[var(--color-ink)]/10"
                 }`}
                 onMouseEnter={() => setHoveredId(edu.id)}
@@ -210,6 +217,7 @@ export function Education() {
             border-radius: 10px;
           }
         `}</style>
+        </div>
       </div>
     </PageTransition>
   );
