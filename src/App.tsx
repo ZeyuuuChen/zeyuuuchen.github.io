@@ -8,6 +8,7 @@ import { Research } from "./pages/Research";
 import { Portfolio } from "./pages/Portfolio";
 import { Education } from "./pages/Education";
 import { Games } from "./pages/Games";
+import { Stats } from "./pages/Stats";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function AnimatedRoutes() {
         <Route path="/education" element={<Education />} />
         <Route path="/research" element={<Research />} />
         <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/admin-stats" element={<Stats />} />
         {/* <Route path="/games" element={<Games />} /> */}
       </Routes>
     </AnimatePresence>

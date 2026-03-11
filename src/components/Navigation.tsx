@@ -3,6 +3,7 @@ import { Mail, Linkedin, Youtube } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { VisitorCounter } from "./VisitorCounter";
 
 export function Navigation() {
   const { t } = useLanguage();
@@ -147,6 +148,8 @@ export function Navigation() {
             )}
           </AnimatePresence>
         </div>
+        
+        <VisitorCounter />
       </div>
     </nav>
   );
